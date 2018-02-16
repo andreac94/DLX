@@ -1,0 +1,76 @@
+#!/bin/bash
+
+# globals and constants
+vcom 000-globals.vhd
+vcom 001-microcode_memory.vhd
+
+# fetch stage
+vcom a.a-Fetch.core/a.a.a-IRAM.vhd
+vcom a.a-Fetch.vhd
+
+# decode stage
+vcom a.b-Decode.core/a.b.a-RegisterFile.vhd
+vcom a.b-Decode.vhd
+
+# execute stage
+# addsub
+vcom a.c-Execute.core/a.c.a-ALU.core/a.c.a.a-AdderSubtractor.core/constants.vhd
+vcom a.c-Execute.core/a.c.a-ALU.core/a.c.a.a-AdderSubtractor.core/custom_types.vhd 
+vcom a.c-Execute.core/a.c.a-ALU.core/a.c.a.a-AdderSubtractor.core/pg_network.vhd
+vcom a.c-Execute.core/a.c.a-ALU.core/a.c.a.a-AdderSubtractor.core/g_element.vhd
+vcom a.c-Execute.core/a.c.a-ALU.core/a.c.a.a-AdderSubtractor.core/pg_element.vhd
+vcom a.c-Execute.core/a.c.a-ALU.core/a.c.a.a-AdderSubtractor.core/tree_decimate.vhd
+vcom a.c-Execute.core/a.c.a-ALU.core/a.c.a.a-AdderSubtractor.core/tree_mantain.vhd
+vcom a.c-Execute.core/a.c.a-ALU.core/a.c.a.a-AdderSubtractor.core/sparse_tree_carry_generator.vhd
+vcom a.c-Execute.core/a.c.a-ALU.core/a.c.a.a-AdderSubtractor.core/mux.vhd
+vcom a.c-Execute.core/a.c.a-ALU.core/a.c.a.a-AdderSubtractor.core/fa.vhd
+vcom a.c-Execute.core/a.c.a-ALU.core/a.c.a.a-AdderSubtractor.core/rca.vhd
+vcom a.c-Execute.core/a.c.a-ALU.core/a.c.a.a-AdderSubtractor.core/carry_select_block.vhd
+vcom a.c-Execute.core/a.c.a-ALU.core/a.c.a.a-AdderSubtractor.core/carry_select_sum_generator.vhd
+vcom a.c-Execute.core/a.c.a-ALU.core/a.c.a.a-AdderSubtractor.core/Adder.vhd
+vcom a.c-Execute.core/a.c.a-ALU.core/a.c.a.a-AdderSubtractor.vhd
+# FP addsub
+vcom a.c-Execute.core/a.c.a-ALU.core/a.c.a.b-FP_AdderSubtractor.core/leading_zero_detection.vhd
+vcom a.c-Execute.core/a.c.a-ALU.core/a.c.a.b-FP_AdderSubtractor.core/complement.vhd
+vcom a.c-Execute.core/a.c.a-ALU.core/a.c.a.b-FP_AdderSubtractor.vhd
+# mul
+vcom a.c-Execute.core/a.c.a-ALU.core/a.c.a.c-Multiplier.core/mul_constants.vhd
+vcom a.c-Execute.core/a.c.a-ALU.core/a.c.a.c-Multiplier.core/mul_custom_types.vhd
+vcom a.c-Execute.core/a.c.a-ALU.core/a.c.a.c-Multiplier.core/mux2to1.vhd
+vcom a.c-Execute.core/a.c.a-ALU.core/a.c.a.c-Multiplier.core/mux31.vhdl
+vcom a.c-Execute.core/a.c.a-ALU.core/a.c.a.c-Multiplier.core/half_adder.vhd
+vcom a.c-Execute.core/a.c.a-ALU.core/a.c.a.c-Multiplier.core/compressor5to2.vhd
+vcom a.c-Execute.core/a.c.a-ALU.core/a.c.a.c-Multiplier.core/block_cmpr_5to2.vhd
+vcom a.c-Execute.core/a.c.a-ALU.core/a.c.a.c-Multiplier.core/encoder_booth.vhdl
+vcom a.c-Execute.core/a.c.a-ALU.core/a.c.a.c-Multiplier.vhd
+# FP mul
+vcom a.c-Execute.core/a.c.a-ALU.core/a.c.a.d-FP_Multiplier.vhd
+# logic unit
+vcom a.c-Execute.core/a.c.a-ALU.core/a.c.a.e-LogicUnit.core/t2_logic.vhd
+vcom a.c-Execute.core/a.c.a-ALU.core/a.c.a.e-LogicUnit.vhd
+# comparator
+vcom a.c-Execute.core/a.c.a-ALU.core/a.c.a.f-Comparator.vhd
+# shifter
+vcom a.c-Execute.core/a.c.a-ALU.core/a.c.a.g-Shifter.vhd
+# ALU
+vcom a.c-Execute.core/a.c.a-ALU.vhd
+vcom a.c-Execute.vhd
+
+# memory stage
+vcom a.d-Memory.core/a.d.a-DRAM.vhd
+vcom a.d-Memory.vhd
+
+# DLX
+vcom a-DLX.vhd
+
+# tests
+vcom test_bench/a.a-TB_Fetch/a.a.a-TB_IRAM.vhd
+vcom test_bench/a.a-TB_Fetch.vhd
+vcom test_bench/a.b-TB_Decode/a.b.a-TB_RegisterFile.vhd
+vcom test_bench/a.b-TB_Decode.vhd
+vcom test_bench/a.c-TB_Execute/a.c.a-TB_ALU/a.c.a.a-TB_AdderSubtractor.vhd
+vcom test_bench/a.c-TB_Execute/a.c.a-TB_ALU/a.c.a.b-TB_FP_AdderSubtractor.vhd
+vcom test_bench/a.c-TB_Execute/a.c.a-TB_ALU/a.c.a.c-TB_Multiplier.vhd
+vcom test_bench/a.c-TB_Execute/a.c.a-TB_ALU/a.c.a.d-TB_FP_Multiplier.vhd
+vcom test_bench/a.c-TB_Execute/a.c.a-TB_ALU/a.c.a.e-TB_LogicUnit.vhd
+vcom test_bench/a.c-TB_Execute/a.c.a-TB_ALU.vhd

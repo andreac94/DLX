@@ -1,0 +1,260 @@
+# //  ModelSim SE 6.2g Feb 21 2007 Linux 2.6.18-410.el5
+# //
+# //  Copyright 1991-2007 Mentor Graphics Corporation
+# //              All Rights Reserved.
+# //
+# //  THIS WORK CONTAINS TRADE SECRET AND 
+# //  PROPRIETARY INFORMATION WHICH IS THE PROPERTY
+# //  OF MENTOR GRAPHICS CORPORATION OR ITS LICENSORS
+# //  AND IS SUBJECT TO LICENSE TERMS.
+# //
+vsim -t 1n -novopt work.tb_decode
+# vsim -t 1n -novopt work.tb_decode 
+# ** Error: (vsim-3000) Invalid resolution limit (-t 1n).
+# Use the -help option for complete vsim usage.
+# Error loading design
+vsim -t 1ns -novopt work.tb_decode
+# vsim -t 1ns -novopt work.tb_decode 
+# Loading /software/mentor/modelsim_6.2g/linux/../std.standard
+# Loading /software/mentor/modelsim_6.2g/linux/../ieee.std_logic_1164(body)
+# Loading /software/mentor/modelsim_6.2g/linux/../ieee.numeric_std(body)
+# Refreshing ./work.dlx_config
+# Loading work.dlx_config
+# Refreshing ./work.tb_decode(test)
+# Loading work.tb_decode(test)
+# Refreshing ./work.microcode_memory
+# Loading work.microcode_memory
+# Refreshing ./work.decodestage(dlx_cu_pu)
+# Loading work.decodestage(dlx_cu_pu)
+# Refreshing ./work.registerfile(simple)
+# Loading work.registerfile(simple)
+# ** Fatal: (vsim-3421) Value -1 is out of range 0 to 17.
+#    Time: 0 ns  Iteration: 0  Instance: /tb_decode/uut File: a.b-Decode.vhd Line: 307
+# FATAL ERROR while loading design
+# Error loading design
+vsim a.b-Decode.vhd
+# OpenFile a.b-Decode.vhd 
+vsim -t 1ns -novopt work.tb_decode
+# vsim -t 1ns -novopt work.tb_decode 
+# Loading /software/mentor/modelsim_6.2g/linux/../std.standard
+# Loading /software/mentor/modelsim_6.2g/linux/../ieee.std_logic_1164(body)
+# Loading /software/mentor/modelsim_6.2g/linux/../ieee.numeric_std(body)
+# Refreshing ./work.dlx_config
+# Loading work.dlx_config
+# Refreshing ./work.tb_decode(test)
+# Loading work.tb_decode(test)
+# Refreshing ./work.microcode_memory
+# Loading work.microcode_memory
+# Refreshing ./work.decodestage(dlx_cu_pu)
+# Loading work.decodestage(dlx_cu_pu)
+# Refreshing ./work.registerfile(simple)
+# Loading work.registerfile(simple)
+# ** Fatal: (vsim-3421) Value -1 is out of range 0 to 17.
+#    Time: 0 ns  Iteration: 0  Instance: /tb_decode/uut File: a.b-Decode.vhd Line: 313
+# FATAL ERROR while loading design
+# Error loading design
+vsim -t 1ns -novopt work.tb_decode
+# vsim -t 1ns -novopt work.tb_decode 
+# Loading /software/mentor/modelsim_6.2g/linux/../std.standard
+# Loading /software/mentor/modelsim_6.2g/linux/../ieee.std_logic_1164(body)
+# Loading /software/mentor/modelsim_6.2g/linux/../ieee.numeric_std(body)
+# Refreshing ./work.dlx_config
+# Loading work.dlx_config
+# Refreshing ./work.tb_decode(test)
+# Loading work.tb_decode(test)
+# Refreshing ./work.microcode_memory
+# Loading work.microcode_memory
+# Refreshing ./work.decodestage(dlx_cu_pu)
+# Loading work.decodestage(dlx_cu_pu)
+# Refreshing ./work.registerfile(simple)
+# Loading work.registerfile(simple)
+# ** Fatal: (vsim-3421) Value -1 is out of range 0 to 17.
+#    Time: 0 ns  Iteration: 0  Instance: /tb_decode/uut File: a.b-Decode.vhd Line: 222
+# FATAL ERROR while loading design
+# Error loading design
+vsim -t 1ns -novopt work.tb_decode
+# vsim -t 1ns -novopt work.tb_decode 
+# Loading /software/mentor/modelsim_6.2g/linux/../std.standard
+# Loading /software/mentor/modelsim_6.2g/linux/../ieee.std_logic_1164(body)
+# Loading /software/mentor/modelsim_6.2g/linux/../ieee.numeric_std(body)
+# Refreshing ./work.dlx_config
+# Loading work.dlx_config
+# Refreshing ./work.tb_decode(test)
+# Loading work.tb_decode(test)
+# Refreshing ./work.microcode_memory
+# Loading work.microcode_memory
+# Refreshing ./work.decodestage(dlx_cu_pu)
+# Loading work.decodestage(dlx_cu_pu)
+# Refreshing ./work.registerfile(simple)
+# Loading work.registerfile(simple)
+vsim -t 1ns -novopt work.tb_decode
+# vsim -t 1ns -novopt work.tb_decode 
+# Loading /software/mentor/modelsim_6.2g/linux/../std.standard
+# Loading /software/mentor/modelsim_6.2g/linux/../ieee.std_logic_1164(body)
+# Loading /software/mentor/modelsim_6.2g/linux/../ieee.numeric_std(body)
+# Refreshing ./work.dlx_config
+# Loading work.dlx_config
+# Refreshing ./work.tb_decode(test)
+# Loading work.tb_decode(test)
+# Refreshing ./work.microcode_memory
+# Loading work.microcode_memory
+# Refreshing ./work.decodestage(dlx_cu_pu)
+# Loading work.decodestage(dlx_cu_pu)
+# Refreshing ./work.registerfile(simple)
+# Loading work.registerfile(simple)
+vsim -t 1ns -novopt work.tb_decode
+# vsim -t 1ns -novopt work.tb_decode 
+# Loading /software/mentor/modelsim_6.2g/linux/../std.standard
+# Loading /software/mentor/modelsim_6.2g/linux/../ieee.std_logic_1164(body)
+# Loading /software/mentor/modelsim_6.2g/linux/../ieee.numeric_std(body)
+# Refreshing ./work.dlx_config
+# Loading work.dlx_config
+# Refreshing ./work.tb_decode(test)
+# Loading work.tb_decode(test)
+# Refreshing ./work.microcode_memory
+# Loading work.microcode_memory
+# Refreshing ./work.decodestage(dlx_cu_pu)
+# Loading work.decodestage(dlx_cu_pu)
+# Refreshing ./work.registerfile(simple)
+# Loading work.registerfile(simple)
+vsim -t 1ns -novopt work.tb_decode
+# vsim -t 1ns -novopt work.tb_decode 
+# Loading /software/mentor/modelsim_6.2g/linux/../std.standard
+# Loading /software/mentor/modelsim_6.2g/linux/../ieee.std_logic_1164(body)
+# Loading /software/mentor/modelsim_6.2g/linux/../ieee.numeric_std(body)
+# Refreshing ./work.dlx_config
+# Loading work.dlx_config
+# Refreshing ./work.tb_decode(test)
+# Loading work.tb_decode(test)
+# Refreshing ./work.microcode_memory
+# Loading work.microcode_memory
+# Refreshing ./work.decodestage(dlx_cu_pu)
+# Loading work.decodestage(dlx_cu_pu)
+# Refreshing ./work.registerfile(simple)
+# Loading work.registerfile(simple)
+vsim -t 1ns -novopt work.tb_decode
+# vsim -t 1ns -novopt work.tb_decode 
+# Loading /software/mentor/modelsim_6.2g/linux/../std.standard
+# Loading /software/mentor/modelsim_6.2g/linux/../ieee.std_logic_1164(body)
+# Loading /software/mentor/modelsim_6.2g/linux/../ieee.numeric_std(body)
+# Refreshing ./work.dlx_config
+# Loading work.dlx_config
+# Refreshing ./work.tb_decode(test)
+# Loading work.tb_decode(test)
+# Refreshing ./work.microcode_memory
+# Loading work.microcode_memory
+# Refreshing ./work.decodestage(dlx_cu_pu)
+# Loading work.decodestage(dlx_cu_pu)
+# Refreshing ./work.registerfile(simple)
+# Loading work.registerfile(simple)
+vsim -t 1ns -novopt work.tb_decode
+# vsim -t 1ns -novopt work.tb_decode 
+# Loading /software/mentor/modelsim_6.2g/linux/../std.standard
+# Loading /software/mentor/modelsim_6.2g/linux/../ieee.std_logic_1164(body)
+# Loading /software/mentor/modelsim_6.2g/linux/../ieee.numeric_std(body)
+# Refreshing ./work.dlx_config
+# Loading work.dlx_config
+# Refreshing ./work.tb_decode(test)
+# Loading work.tb_decode(test)
+# Refreshing ./work.microcode_memory
+# Loading work.microcode_memory
+# Refreshing ./work.decodestage(dlx_cu_pu)
+# Loading work.decodestage(dlx_cu_pu)
+# Refreshing ./work.registerfile(simple)
+# Loading work.registerfile(simple)
+vsim -t 1ns -novopt work.tb_decode
+# vsim -t 1ns -novopt work.tb_decode 
+# Loading /software/mentor/modelsim_6.2g/linux/../std.standard
+# Loading /software/mentor/modelsim_6.2g/linux/../ieee.std_logic_1164(body)
+# Loading /software/mentor/modelsim_6.2g/linux/../ieee.numeric_std(body)
+# Refreshing ./work.dlx_config
+# Loading work.dlx_config
+# Refreshing ./work.tb_decode(test)
+# Loading work.tb_decode(test)
+# Refreshing ./work.microcode_memory
+# Loading work.microcode_memory
+# Refreshing ./work.decodestage(dlx_cu_pu)
+# Loading work.decodestage(dlx_cu_pu)
+# Refreshing ./work.registerfile(simple)
+# Loading work.registerfile(simple)
+vsim -t 1ns -novopt work.tb_decode
+# vsim -t 1ns -novopt work.tb_decode 
+# Loading /software/mentor/modelsim_6.2g/linux/../std.standard
+# Loading /software/mentor/modelsim_6.2g/linux/../ieee.std_logic_1164(body)
+# Loading /software/mentor/modelsim_6.2g/linux/../ieee.numeric_std(body)
+# Refreshing ./work.dlx_config
+# Loading work.dlx_config
+# Refreshing ./work.tb_decode(test)
+# Loading work.tb_decode(test)
+# Refreshing ./work.microcode_memory
+# Loading work.microcode_memory
+# Refreshing ./work.decodestage(dlx_cu_pu)
+# Loading work.decodestage(dlx_cu_pu)
+# Refreshing ./work.registerfile(simple)
+# Loading work.registerfile(simple)
+# ** Fatal: (vsim-3421) Value -1 is out of range 0 to 17.
+#    Time: 0 ns  Iteration: 0  Instance: /tb_decode/uut File: a.b-Decode.vhd Line: 307
+# FATAL ERROR while loading design
+# Error loading design
+vsim -t 1ns -novopt work.tb_decode
+# vsim -t 1ns -novopt work.tb_decode 
+# Loading /software/mentor/modelsim_6.2g/linux/../std.standard
+# Loading /software/mentor/modelsim_6.2g/linux/../ieee.std_logic_1164(body)
+# Loading /software/mentor/modelsim_6.2g/linux/../ieee.numeric_std(body)
+# Refreshing ./work.dlx_config
+# Loading work.dlx_config
+# Refreshing ./work.tb_decode(test)
+# Loading work.tb_decode(test)
+# Refreshing ./work.microcode_memory
+# Loading work.microcode_memory
+# Refreshing ./work.decodestage(dlx_cu_pu)
+# Loading work.decodestage(dlx_cu_pu)
+# Refreshing ./work.registerfile(simple)
+# Loading work.registerfile(simple)
+source sim_decode
+# vsim -t 1ns -novopt work.tb_decode 
+# Loading /software/mentor/modelsim_6.2g/linux/../std.standard
+# Loading /software/mentor/modelsim_6.2g/linux/../ieee.std_logic_1164(body)
+# Loading /software/mentor/modelsim_6.2g/linux/../ieee.numeric_std(body)
+# Loading work.dlx_config
+# Loading work.tb_decode(test)
+# Loading work.microcode_memory
+# Loading work.decodestage(dlx_cu_pu)
+# Loading work.registerfile(simple)
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ns  Iteration: 0  Instance: /tb_decode/uut
+source sim_decode
+# vsim -t 1ns -novopt work.tb_decode 
+# Loading /software/mentor/modelsim_6.2g/linux/../std.standard
+# Loading /software/mentor/modelsim_6.2g/linux/../ieee.std_logic_1164(body)
+# Loading /software/mentor/modelsim_6.2g/linux/../ieee.numeric_std(body)
+# Refreshing ./work.dlx_config
+# Loading work.dlx_config
+# Refreshing ./work.tb_decode(test)
+# Loading work.tb_decode(test)
+# Refreshing ./work.microcode_memory
+# Loading work.microcode_memory
+# Refreshing ./work.decodestage(dlx_cu_pu)
+# Loading work.decodestage(dlx_cu_pu)
+# Refreshing ./work.registerfile(simple)
+# Loading work.registerfile(simple)
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ns  Iteration: 0  Instance: /tb_decode/uut
+source sim_decode
+# vsim -t 1ns -novopt work.tb_decode 
+# Loading /software/mentor/modelsim_6.2g/linux/../std.standard
+# Loading /software/mentor/modelsim_6.2g/linux/../ieee.std_logic_1164(body)
+# Loading /software/mentor/modelsim_6.2g/linux/../ieee.numeric_std(body)
+# Refreshing ./work.dlx_config
+# Loading work.dlx_config
+# Refreshing ./work.tb_decode(test)
+# Loading work.tb_decode(test)
+# Refreshing ./work.microcode_memory
+# Loading work.microcode_memory
+# Refreshing ./work.decodestage(dlx_cu_pu)
+# Loading work.decodestage(dlx_cu_pu)
+# Refreshing ./work.registerfile(simple)
+# Loading work.registerfile(simple)
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ns  Iteration: 0  Instance: /tb_decode/uut
+exit -force

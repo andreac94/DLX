@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# libraries
+vcom 000-globals.vhd
+
+vcom complement.vhd
+vcom leading_zero_detection.vhd
+
+# adder
+vcom FP_adder_subtractor.vhd
+vcom FP_AS_TB.vhd
+
+# multiplier
+vcom FP_multiplier.vhd
+vcom FP_M_TB.vhd
+
+# divider
+vcom FP_divider.vhd
+vcom FP_D_TB.vhd

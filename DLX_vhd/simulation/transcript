@@ -1,0 +1,86 @@
+# //  ModelSim SE 6.2g Feb 21 2007 Linux 2.6.18-410.el5
+# //
+# //  Copyright 1991-2007 Mentor Graphics Corporation
+# //              All Rights Reserved.
+# //
+# //  THIS WORK CONTAINS TRADE SECRET AND 
+# //  PROPRIETARY INFORMATION WHICH IS THE PROPERTY
+# //  OF MENTOR GRAPHICS CORPORATION OR ITS LICENSORS
+# //  AND IS SUBJECT TO LICENSE TERMS.
+# //
+vsim -t 1ns -novopt tb_fp_addersubtractor
+# vsim -t 1ns -novopt tb_fp_addersubtractor 
+# Loading /software/mentor/modelsim_6.2g/linux/../std.standard
+# Loading /software/mentor/modelsim_6.2g/linux/../ieee.std_logic_1164(body)
+# Loading /software/mentor/modelsim_6.2g/linux/../ieee.numeric_std(body)
+# Refreshing ./work.tb_fp_addersubtractor(test)
+# Loading work.tb_fp_addersubtractor(test)
+# Refreshing ./work.dlx_config
+# Loading work.dlx_config
+# Refreshing ./work.leading_zero_detection(body)
+# Loading work.leading_zero_detection(body)
+# Refreshing ./work.complement(body)
+# Loading work.complement(body)
+# Refreshing ./work.fp_addersubtractor(behavioural)
+# Loading work.fp_addersubtractor(behavioural)
+add wave sim:/tb_fp_addersubtractor/fpas/*
+add wave sim:/tb_fp_addersubtractor/fpas/main/*
+run 30 ns
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ns  Iteration: 0  Instance: /tb_fp_addersubtractor/fpas
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ns  Iteration: 0  Instance: /tb_fp_addersubtractor/fpas
+# ** Error: numstd_lte_un: NATURAL arg value is negative (-1)
+#    Time: 0 ns  Iteration: 0  Instance: /tb_fp_addersubtractor/fpas
+# ** Warning: NUMERIC_STD."<=": metavalue detected, returning FALSE
+#    Time: 0 ns  Iteration: 0  Instance: /tb_fp_addersubtractor/fpas
+# ** Error: numstd_minus_unuA: NATURAL arg value is negative (-1)
+#    Time: 0 ns  Iteration: 0  Instance: /tb_fp_addersubtractor/fpas
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ns  Iteration: 1  Instance: /tb_fp_addersubtractor/fpas
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ns  Iteration: 1  Instance: /tb_fp_addersubtractor/fpas
+# ** Error: numstd_lte_un: NATURAL arg value is negative (-1)
+#    Time: 0 ns  Iteration: 1  Instance: /tb_fp_addersubtractor/fpas
+# ** Warning: NUMERIC_STD."<=": metavalue detected, returning FALSE
+#    Time: 0 ns  Iteration: 1  Instance: /tb_fp_addersubtractor/fpas
+# ** Error: numstd_minus_unuA: NATURAL arg value is negative (-1)
+#    Time: 0 ns  Iteration: 1  Instance: /tb_fp_addersubtractor/fpas
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 5 ns  Iteration: 1  Instance: /tb_fp_addersubtractor/fpas
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 5 ns  Iteration: 1  Instance: /tb_fp_addersubtractor/fpas
+# ** Error: numstd_lte_un: NATURAL arg value is negative (-1)
+#    Time: 5 ns  Iteration: 1  Instance: /tb_fp_addersubtractor/fpas
+# ** Warning: NUMERIC_STD."<=": metavalue detected, returning FALSE
+#    Time: 5 ns  Iteration: 1  Instance: /tb_fp_addersubtractor/fpas
+# ** Error: numstd_minus_unuA: NATURAL arg value is negative (-1)
+#    Time: 5 ns  Iteration: 1  Instance: /tb_fp_addersubtractor/fpas
+vsim -t 1ns -novopt tb_fp_addersubtractor
+# vsim -t 1ns -novopt tb_fp_addersubtractor 
+# Loading /software/mentor/modelsim_6.2g/linux/../std.standard
+# Loading /software/mentor/modelsim_6.2g/linux/../ieee.std_logic_1164(body)
+# Loading /software/mentor/modelsim_6.2g/linux/../ieee.numeric_std(body)
+# Refreshing ./work.tb_fp_addersubtractor(test)
+# Loading work.tb_fp_addersubtractor(test)
+# Refreshing ./work.dlx_config
+# Loading work.dlx_config
+# Refreshing ./work.leading_zero_detection(body)
+# Loading work.leading_zero_detection(body)
+# Refreshing ./work.complement(body)
+# Loading work.complement(body)
+# Refreshing ./work.fp_addersubtractor(behavioural)
+# Loading work.fp_addersubtractor(behavioural)
+add wave sim:/tb_fp_addersubtractor/fpas/*
+add wave sim:/tb_fp_addersubtractor/fpas/main/*
+run 30 ns
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ns  Iteration: 0  Instance: /tb_fp_addersubtractor/fpas
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ns  Iteration: 0  Instance: /tb_fp_addersubtractor/fpas
+# ** Error: numstd_lte_un: NATURAL arg value is negative (-1)
+#    Time: 0 ns  Iteration: 0  Instance: /tb_fp_addersubtractor/fpas
+# ** Warning: NUMERIC_STD."<=": metavalue detected, returning FALSE
+#    Time: 0 ns  Iteration: 0  Instance: /tb_fp_addersubtractor/fpas
+# ** Error: numstd_minus_unuA: NATURAL arg value is negative (-1)
+#    Time: 0 ns  Iteration: 0  Instance: /tb_fp_addersubtractor/fpas

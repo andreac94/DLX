@@ -1,0 +1,27 @@
+\documentclass[a4paper,10pt]{article}
+%\documentclass[a4paper,10pt]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+
+\title{DLX architecture}
+\author{Flavio Tanese}
+\date{2017/5/25}
+
+\begin{document}
+\maketitle
+
+\section{Memory access}
+ This custom DLX uses a Von Neumann architecture with data and instructions on the same physical memory.
+ 
+ All memory accesses are aligned, meaning that fetching a half-word requires 1 less address bit than fetching a byte
+ (as the LSB is forced to 0 and can be hardwired to ground somewhere else). Still, since the spare bit would be unused
+ and additional hardware would be required to pass a different number of bits to the memory access unit, it was decided
+ that this property would not be exploited.
+ 
+ Fetched data are stored in a data cache, while instructions are stored in a separated instruction cache thus
+ virtualizing a Harvard architecture.
+ 
+ The architecture is big endian with 32-bit registers: operations work on full 32 bits even if the operands would
+ require less. Loading a smaller operand will result in sign extension to get its size to 32 bits.
+
+\end{document}

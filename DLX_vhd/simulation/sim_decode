@@ -1,0 +1,4 @@
+vsim -t 1ns -novopt work.tb_decode
+add wave sim:/tb_decode/uut/*
+radix hexadecimal
+run 200 ns

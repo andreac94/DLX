@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# Common
+vcom constants.vhd
+vcom custom_types.vhd
+
+# Tree carry generator
+vcom pg_network.vhd
+vcom g_element.vhd
+vcom pg_element.vhd
+vcom tree_decimate.vhd
+vcom tree_mantain.vhd
+vcom sparse_tree_carry_generator.vhd
+
+# Carry select adder
+vcom mux.vhd
+vcom fa.vhd
+vcom rca.vhd
+vcom carry_select_block.vhd
+vcom carry_select_sum_generator.vhd
+
+# Top level
+vcom add.vhd
+
+
+# Testbenches for various components
+vcom tb_add.vhd
+vcom tb_stcg.vhd
+vcom tb_cssg.vhd
+vcom tb_csb.vhd
+vcom tb_rca.vhd
+vcom tb_mux.vhd

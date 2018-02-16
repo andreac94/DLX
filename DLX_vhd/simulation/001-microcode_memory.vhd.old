@@ -1,0 +1,591 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
+library work;
+use work.dlx_config.all;
+
+package microcode_memory is
+    type mem_array is array (integer range 0 to microcode_mem_size - 1) of std_logic_vector(12 - 1 downto 0);
+    type reloc_mem_array is array (0 to reloc_mem_size - 1) of std_logic_vector(8-1 downto 0);
+    
+    constant    reloc_mem_content:  reloc_mem_array:=  (X"00",  -- All R-type instructions are not relocated
+                                                        X"00",  -- All F-type instructions are not relocated (additional external bit to select FP part of memory)
+                                                        X"02",  -- J(0x02)     -> 0x02
+                                                        X"03",  -- JAL(0X03)   -> 0x03
+                                                        X"05",  -- BEQZ(0x04)  -> 0x05
+                                                        X"08",  -- BNEZ(0x05)  -> 0X08
+                                                        X"09",  -- BFPT(0x06)  -> 0x09
+                                                        X"0a",  -- BFPF(0x07)  -> 0x0a
+                                                        X"0b",  -- ADDI(0x08)  -> 0x0b
+                                                        X"0c",  -- ADDUI(0x09) -> 0x0c
+                                                        X"0d",  -- SUBI(0x0a)  -> 0x0d
+                                                        X"0e",  -- SUBUI(0x0b) -> 0x0e
+                                                        X"0f",  -- ANDI(0x0c)  -> 0x0f
+                                                        X"10",  -- ORI(0x0d)   -> 0x10
+                                                        X"11",  -- XORI(0x0e)  -> 0x11
+                                                        X"12",  -- LHI(0x0f)   -> 0x12
+                                                        X"13",  -- RFE(0x10)   -> 0x13
+                                                        X"14",  -- TRAP(0x11)  -> 0x14
+                                                        X"15",  -- JR(0x12)    -> 0x15
+                                                        X"16",  -- JALR(0x13)  -> 0x16
+                                                        X"17",  -- SLLI(0x14)  -> 0x17
+                                                        X"18",  -- NOP(0x15)   -> 0x18
+                                                        X"19",  -- SRLI(0x16)  -> 0x19
+                                                        X"1a",  -- SRAI(0x17)  -> 0x1a
+                                                        X"1b",  -- SEQI(0x18)  -> 0x1b
+                                                        X"1c",  -- SNEI(0x19)  -> 0x1c
+                                                        X"1d",  -- SLTI(0x1a)  -> 0x1d
+                                                        X"1e",  -- SGTI(0x1b)  -> 0x1e
+                                                        X"1f",  -- SLEI(0x1c)  -> 0x1f
+                                                        X"27",  -- SGEI(0x1d)  -> 0x27
+                                                        X"00",
+                                                        X"00",
+                                                        X"2e",  -- LB(0x20)    -> 0x2e
+                                                        X"2f",  -- LH(0x21)    -> 0x2f
+                                                        X"00",
+                                                        X"68",  -- LW(0x23)    -> 0x68
+                                                        X"38",  -- LBU(0x24)   -> 0x38
+                                                        X"39",  -- LHU(0x25)   -> 0x39
+                                                        X"3e",  -- LF(0x26)    -> 0x3e
+                                                        X"3f",  -- LD(0x27)    -> 0x3f
+                                                        X"5e",  -- SB(0x28)    -> 0x5e
+                                                        X"5f",  -- SH(0x29)    -> 0x5f
+                                                        X"00",
+                                                        X"60",  -- SW(0x2b)    -> 0x60
+                                                        X"00",
+                                                        X"00",
+                                                        X"61",  -- SF(0x2e)    -> 0x120
+                                                        X"62",  -- SD(0x2f)    -> 0x121
+                                                        X"00",
+                                                        X"00",
+                                                        X"00",
+                                                        X"00",
+                                                        X"00",
+                                                        X"00",
+                                                        X"00",
+                                                        X"00",
+                                                        X"63",  -- ITLB(0x38)  -> 0x122
+                                                        X"00",
+                                                        X"64",  -- SLTUI(0x3a) -> 0x123
+                                                        X"65",  -- SGTUI(0x3b) -> 0x124
+                                                        X"66",  -- SLEUI(0x3c) -> 0x125
+                                                        X"67",  -- SGEUI(0x3d) -> 0x126
+                                                        X"00",
+                                                        X"00");
+
+-- Just a counter of memory position to test for the time being.
+    constant    microcode_mem_content:  mem_array:=    (X"000",  -- RESET                    (0x000) 0x00
+                                                        X"001",  -- (IF)                     (0x001)
+                                                        X"002",  --                          (0x002)
+                                                        X"003",  --                          (0x003)
+                                                        X"004",  -- (ID)                     (0x004) 0x01
+                                                        X"005",  -- (EX)                     (0x005)
+                                                        X"006",  -- (MEM)                    (0x006)
+                                                        X"007",  -- (WB)                     (0x007)
+                                                        X"008",  -- (ID) "J"                 (0x008) 0x02
+                                                        X"009",  -- (EX)                     (0x009)
+                                                        X"00a",  -- (MEM)                    (0x00a)
+                                                        X"00b",  -- (WB)                     (0x00b)
+                                                        X"00c",  -- (ID) "JAL"               (0x00c) 0x03
+                                                        X"00d",  -- (EX)                     (0x00d)
+                                                        X"00e",  -- (MEM)                    (0x00e)
+                                                        X"00f",  -- (WB)                     (0x00f)
+                                                        X"010",  -- (ID) "SLL"               (0x010) 0x04
+                                                        X"011",  -- (EX)                     (0x011)
+                                                        X"012",  -- (MEM)                    (0x012)
+                                                        X"013",  -- (WB)                     (0x013)
+                                                        X"014",  -- (ID) "BEQZ"              (0x014) 0x05
+                                                        X"015",  -- (EX)                     (0x015)
+                                                        X"016",  -- (MEM)                    (0x016)
+                                                        X"017",  -- (WB)                     (0x017)
+                                                        X"018",  -- (ID) "SRL"               (0x018) 0x06
+                                                        X"019",  -- (EX)                     (0x019)
+                                                        X"01a",  -- (MEM)                    (0x01a)
+                                                        X"01b",  -- (WB)                     (0x01b)
+                                                        X"01c",  -- (ID) "SRA"               (0x01c) 0x07
+                                                        X"01d",  -- (EX)                     (0x01d)
+                                                        X"01e",  -- (MEM)                    (0x01e)
+                                                        X"01f",  -- (WB)                     (0x01f)
+                                                        X"020",  -- (ID) "BNEZ"              (0x020) 0x08
+                                                        X"021",  -- (EX)                     (0x021)
+                                                        X"022",  -- (MEM)                    (0x022)
+                                                        X"023",  -- (WB)                     (0x023)
+                                                        X"024",  -- (ID) "BFPT"              (0x024) 0x09
+                                                        X"025",  -- (EX)                     (0x025)
+                                                        X"026",  -- (MEM)                    (0x026)
+                                                        X"027",  -- (WB)                     (0x027)
+                                                        X"028",  -- (ID) "BFPF"              (0x028) 0x0a
+                                                        X"029",  -- (EX)                     (0x029)
+                                                        X"02a",  -- (MEM)                    (0x02a)
+                                                        X"02b",  -- (WB)                     (0x02b)
+                                                        X"02c",  -- (ID) "ADDI"              (0x02c) 0x0b
+                                                        X"02d",  -- (EX)                     (0x02d)
+                                                        X"02e",  -- (MEM)                    (0x02e)
+                                                        X"02f",  -- (WB)                     (0x02f)
+                                                        X"030",  -- (ID) "ADDUI"             (0x030) 0x0c
+                                                        X"031",  -- (EX)                     (0x031)
+                                                        X"032",  -- (MEM)                    (0x032)
+                                                        X"033",  -- (WB)                     (0x033)
+                                                        X"034",  -- (ID) "SUBI"              (0x034) 0x0d
+                                                        X"035",  -- (EX)                     (0x035)
+                                                        X"036",  -- (MEM)                    (0x036)
+                                                        X"037",  -- (WB)                     (0x037)
+                                                        X"038",  -- (ID) "SUBUI"             (0x038) 0x0e
+                                                        X"039",  -- (EX)                     (0x039)
+                                                        X"03a",  -- (MEM)                    (0x03a)
+                                                        X"03b",  -- (WB)                     (0x03b)
+                                                        X"03c",  -- (ID) "ANDI"              (0x03c) 0x0f
+                                                        X"03d",  -- (EX)                     (0x03d)
+                                                        X"03e",  -- (MEM)                    (0x03e)
+                                                        X"03f",  -- (WB)                     (0x03f)
+                                                        X"040",  -- (ID) "ORI"               (0x040) 0x10
+                                                        X"041",  -- (EX)                     (0x041)
+                                                        X"042",  -- (MEM)                    (0x042)
+                                                        X"043",  -- (WB)                     (0x043)
+                                                        X"044",  -- (ID) "XORI"              (0x044) 0x11
+                                                        X"045",  -- (EX)                     (0x045)
+                                                        X"046",  -- (MEM)                    (0x046)
+                                                        X"047",  -- (WB)                     (0x047)
+                                                        X"048",  -- (ID) "LHI"               (0x048) 0x12
+                                                        X"049",  -- (EX)                     (0x049)
+                                                        X"04a",  -- (MEM)                    (0x04a)
+                                                        X"04b",  -- (WB)                     (0x04b)
+                                                        X"04c",  -- (ID) "RFE"               (0x04c) 0x13
+                                                        X"04d",  -- (EX)                     (0x04d)
+                                                        X"04e",  -- (MEM)                    (0x04e)
+                                                        X"04f",  -- (WB)                     (0x04f)
+                                                        X"050",  -- (ID) "TRAP"              (0x050) 0x14
+                                                        X"051",  -- (EX)                     (0x051)
+                                                        X"052",  -- (MEM)                    (0x052)
+                                                        X"053",  -- (WB)                     (0x053)
+                                                        X"054",  -- (ID) "JR"                (0x054) 0x15
+                                                        X"055",  -- (EX)                     (0x055)
+                                                        X"056",  -- (MEM)                    (0x056)
+                                                        X"057",  -- (WB)                     (0x057)
+                                                        X"058",  -- (ID) "JALR"              (0x058) 0x16
+                                                        X"059",  -- (EX)                     (0x059)
+                                                        X"05a",  -- (MEM)                    (0x05a)
+                                                        X"05b",  -- (WB)                     (0x05b)
+                                                        X"05c",  -- (ID) "SLLI"              (0x05c) 0x17
+                                                        X"05d",  -- (EX)                     (0x05d)
+                                                        X"05e",  -- (MEM)                    (0x05e)
+                                                        X"05f",  -- (WB)                     (0x05f)
+                                                        X"060",  -- (ID) "NOP"               (0x060) 0x18
+                                                        X"061",  -- (EX)                     (0x061)
+                                                        X"062",  -- (MEM)                    (0x062)
+                                                        X"063",  -- (WB)                     (0x063)
+                                                        X"064",  -- (ID) "SRLI"              (0x064) 0x19
+                                                        X"065",  -- (EX)                     (0x065)
+                                                        X"066",  -- (MEM)                    (0x066)
+                                                        X"067",  -- (WB)                     (0x067)
+                                                        X"068",  -- (ID) "SRAI"              (0x068) 0x1a
+                                                        X"069",  -- (EX)                     (0x069)
+                                                        X"06a",  -- (MEM)                    (0x06a)
+                                                        X"06b",  -- (WB)                     (0x06b)
+                                                        X"06c",  -- (ID) "SEQI"              (0x06c) 0x1b
+                                                        X"06d",  -- (EX)                     (0x06d)
+                                                        X"06e",  -- (MEM)                    (0x06e)
+                                                        X"06f",  -- (WB)                     (0x06f)
+                                                        X"070",  -- (ID) "SNEI"              (0x070) 0x1c
+                                                        X"071",  -- (EX)                     (0x071)
+                                                        X"072",  -- (MEM)                    (0x072)
+                                                        X"073",  -- (WB)                     (0x073)
+                                                        X"074",  -- (ID) "SLTI"              (0x074) 0x1d
+                                                        X"075",  -- (EX)                     (0x075)
+                                                        X"076",  -- (MEM)                    (0x076)
+                                                        X"077",  -- (WB)                     (0x077)
+                                                        X"078",  -- (ID) "SGTI"              (0x078) 0x1e
+                                                        X"079",  -- (EX)                     (0x079)
+                                                        X"07a",  -- (MEM)                    (0x07a)
+                                                        X"07b",  -- (WB)                     (0x07b)
+                                                        X"07c",  -- (ID) "SLEI"              (0x07c) 0x1f
+                                                        X"07d",  -- (EX)                     (0x07d)
+                                                        X"07e",  -- (MEM)                    (0x07e)
+                                                        X"07f",  -- (WB)                     (0x07f)
+                                                        X"080",  -- (ID) "ADD"               (0x080) 0x20
+                                                        X"081",  -- (EX)                     (0x081)
+                                                        X"082",  -- (MEM)                    (0x082)
+                                                        X"083",  -- (WB)                     (0x083)
+                                                        X"084",  -- (ID) "ADDU"              (0x084) 0x21
+                                                        X"085",  -- (EX)                     (0x085)
+                                                        X"086",  -- (MEM)                    (0x086)
+                                                        X"087",  -- (WB)                     (0x087)
+                                                        X"088",  -- (ID) "SUB"               (0x088) 0x22
+                                                        X"089",  -- (EX)                     (0x089)
+                                                        X"08a",  -- (MEM)                    (0x08a)
+                                                        X"08b",  -- (WB)                     (0x08b)
+                                                        X"08c",  -- (ID) "SUBU"              (0x08c) 0x23
+                                                        X"08d",  -- (EX)                     (0x08d)
+                                                        X"08e",  -- (MEM)                    (0x08e)
+                                                        X"08f",  -- (WB)                     (0x08f)
+                                                        X"090",  -- (ID) "AND"               (0x090) 0x24
+                                                        X"091",  -- (EX)                     (0x091)
+                                                        X"092",  -- (MEM)                    (0x092)
+                                                        X"093",  -- (WB)                     (0x093)
+                                                        X"094",  -- (ID) "OR"                (0x094) 0x25
+                                                        X"095",  -- (EX)                     (0x095)
+                                                        X"096",  -- (MEM)                    (0x096)
+                                                        X"097",  -- (WB)                     (0x097)
+                                                        X"098",  -- (ID) "XOR"               (0x098) 0x26
+                                                        X"099",  -- (EX)                     (0x099)
+                                                        X"09a",  -- (MEM)                    (0x09a)
+                                                        X"09b",  -- (WB)                     (0x09b)
+                                                        X"09c",  -- (ID) "SGEI"              (0x09c) 0x27
+                                                        X"09d",  -- (EX)                     (0x09d)
+                                                        X"09e",  -- (MEM)                    (0x09e)
+                                                        X"09f",  -- (WB)                     (0x09f)
+                                                        X"0a0",  -- (ID) "SEQ"               (0x0a0) 0x28
+                                                        X"0a1",  -- (EX)                     (0x0a1)
+                                                        X"0a2",  -- (MEM)                    (0x0a2)
+                                                        X"0a3",  -- (WB)                     (0x0a3)
+                                                        X"0a4",  -- (ID) "SNE"               (0x0a4) 0x29
+                                                        X"0a5",  -- (EX)                     (0x0a5)
+                                                        X"0a6",  -- (MEM)                    (0x0a6)
+                                                        X"0a7",  -- (WB)                     (0x0a7)
+                                                        X"0a8",  -- (ID) "SLT"               (0x0a8) 0x2a
+                                                        X"0a9",  -- (EX)                     (0x0a9)
+                                                        X"0aa",  -- (MEM)                    (0x0aa)
+                                                        X"0ab",  -- (WB)                     (0x0ab)
+                                                        X"0ac",  -- (ID) "SGT"               (0x0ac) 0x2b
+                                                        X"0ad",  -- (EX)                     (0x0ad)
+                                                        X"0ae",  -- (MEM)                    (0x0ae)
+                                                        X"0af",  -- (EB)                     (0x0af)
+                                                        X"0b0",  -- (ID) "SLE"               (0x0b0) 0x2c
+                                                        X"0b1",  -- (EX)                     (0x0b1)
+                                                        X"0b2",  -- (MEM)                    (0x0b2)
+                                                        X"0b3",  -- (EB)                     (0x0b3)
+                                                        X"0b4",  -- (ID) "SGE"               (0x0b4) 0x2d
+                                                        X"0b5",  -- (EX)                     (0x0b5)
+                                                        X"0b6",  -- (MEM)                    (0x0b6)
+                                                        X"0b7",  -- (WB)                     (0x0b7)
+                                                        X"0b8",  -- (ID) "LB"                (0x0b8) 0x2e
+                                                        X"0b9",  -- (EX)                     (0x0b9)
+                                                        X"0ba",  -- (MEM)                    (0x0ba)
+                                                        X"0bb",  -- (WB)                     (0x0bb)
+                                                        X"0bc",  -- (ID) "LH"                (0x0bc) 0x2f
+                                                        X"0bd",  -- (EX)                     (0x0bd)
+                                                        X"0be",  -- (MEM)                    (0x0be)
+                                                        X"0bf",  -- (WB)                     (0x0bf)
+                                                        X"0c0",  -- (ID) "MOVI2S"            (0x0c0) 0x30
+                                                        X"0c1",  -- (EX)                     (0x0c1)
+                                                        X"0c2",  -- (MEM)                    (0x0c2)
+                                                        X"0c3",  -- (WB)                     (0x0c3)
+                                                        X"0c4",  -- (ID) "MOVS2I"            (0x0c4) 0x31
+                                                        X"0c5",  -- (EX)                     (0x0c5)
+                                                        X"0c6",  -- (MEM)                    (0x0c6)
+                                                        X"0c7",  -- (WB)                     (0x0c7)
+                                                        X"0c8",  -- (ID) "MOVF"              (0x0c8) 0x32
+                                                        X"0c9",  -- (EX)                     (0x0c9)
+                                                        X"0ca",  -- (MEM)                    (0x0ca)
+                                                        X"0cb",  -- (WB)                     (0x0cb)
+                                                        X"0cc",  -- (ID) "MOVD"              (0x0cc) 0x33
+                                                        X"0cd",  -- (EX)                     (0x0cd)
+                                                        X"0ce",  -- (MEM)                    (0x0ce)
+                                                        X"0cf",  -- (WB)                     (0x0cf)
+                                                        X"0d0",  -- (ID) "MOVFP2I"           (0x0d0) 0x34
+                                                        X"0d1",  -- (EX)                     (0x0d1)
+                                                        X"0d2",  -- (MEM)                    (0x0d2)
+                                                        X"0d3",  -- (WB)                     (0x0d3)
+                                                        X"0d4",  -- (ID) "MOVI2FP            (0x0d4) 0x35
+                                                        X"0d5",  -- (EX)                     (0x0d5)
+                                                        X"0d6",  -- (MEM)                    (0x0d6)
+                                                        X"0d7",  -- (WB)                     (0x0d7)
+                                                        X"0d8",  -- (ID) "MOVI2T"            (0x0d8) 0x36
+                                                        X"0d9",  -- (EX)                     (0x0d9)
+                                                        X"0da",  -- (MEM)                    (0x0da)
+                                                        X"0db",  -- (WB)                     (0x0db)
+                                                        X"0dc",  -- (ID) "MOVT2I"            (0x0dc) 0x37
+                                                        X"0dd",  -- (EX)                     (0x0dd)
+                                                        X"0de",  -- (MEM)                    (0x0de)
+                                                        X"0df",  -- (WB)                     (0x0df)
+                                                        X"0e0",  -- (ID) "LBU"               (0x0e0) 0x38
+                                                        X"0e1",  -- (EX)                     (0x0e1)
+                                                        X"0e2",  -- (MEM)                    (0x0e2)
+                                                        X"0e3",  -- (WB)                     (0x0e3)
+                                                        X"0e4",  -- (ID) "LHU"               (0x0e4) 0x39
+                                                        X"0e5",  -- (EX)                     (0x0e5)
+                                                        X"0e6",  -- (MEM)                    (0x0e6)
+                                                        X"0e7",  -- (WB)                     (0x0e7)
+                                                        X"0e8",  -- (ID) "SLTU"              (0x0e8) 0x3a
+                                                        X"0e9",  -- (EX)                     (0x0e9)
+                                                        X"0ea",  -- (MEM)                    (0x0ea)
+                                                        X"0eb",  -- (WB)                     (0x0eb)
+                                                        X"0ec",  -- (ID) "SGTU"              (0x0ec) 0x3b
+                                                        X"0ed",  -- (EX)                     (0x0ed)
+                                                        X"0ee",  -- (MEM)                    (0x0ee)
+                                                        X"0ef",  -- (WB)                     (0x0ef)
+                                                        X"0f0",  -- (ID) "SLEU"              (0x0f0) 0x3c
+                                                        X"0f1",  -- (EX)                     (0x0f1)
+                                                        X"0f2",  -- (MEM)                    (0x0f2)
+                                                        X"0f3",  -- (WB)                     (0x0f3)
+                                                        X"0f4",  -- (ID) "SGEU"              (0x0f4) 0x3d
+                                                        X"0f5",  -- (EX)                     (0x0f5)
+                                                        X"0f6",  -- (MEM)                    (0x0f6)
+                                                        X"0f7",  -- (WB)                     (0x0f7)
+                                                        X"0f8",  -- (ID) "LF"                (0x0f8) 0x3e
+                                                        X"0f9",  -- (EX)                     (0x0f9)
+                                                        X"0fa",  -- (MEM)                    (0x0fa)
+                                                        X"0fb",  -- (WB)                     (0x0fb)
+                                                        X"0fc",  -- (ID) "LD"                (0x0fc) 0x3f
+                                                        X"0fd",  -- (EX)                     (0x0fd)
+                                                        X"0fe",  -- (MEM)                    (0x0fe)
+                                                        X"0ff",  -- (WB)                     (0x0ff)
+------------------------------------------------------- FLOATING POINT FROM HERE ON -------------------------------------------------------
+                                                        X"100",  -- (ID) "ADDF"              (0x100) 0x40
+                                                        X"101",  -- (EX)                     (0x101)
+                                                        X"102",  -- (MEM)                    (0x102)
+                                                        X"103",  -- (WB)                     (0x103)
+                                                        X"104",  -- (ID) "SUBF"              (0x104) 0x41
+                                                        X"105",  -- (EX)                     (0x105)
+                                                        X"106",  -- (MEM)                    (0x106)
+                                                        X"107",  -- (WB)                     (0x107)
+                                                        X"108",  -- (ID) "MULTF"             (0x108) 0x42
+                                                        X"109",  -- (EX)                     (0x109)
+                                                        X"10a",  -- (MEM)                    (0x10a)
+                                                        X"10b",  -- (WB)                     (0x10b)
+                                                        X"10c",  -- (ID) "DIVF"              (0x10c) 0x43
+                                                        X"10d",  -- (EX)                     (0x10d)
+                                                        X"10e",  -- (MEM)                    (0x10e)
+                                                        X"10f",  -- (WB)                     (0x10f)
+                                                        X"110",  -- (ID) "ADDD"              (0x110) 0x44
+                                                        X"111",  -- (EX)                     (0x111)
+                                                        X"112",  -- (MEM)                    (0x112)
+                                                        X"113",  -- (WB)                     (0x113)
+                                                        X"114",  -- (ID) "SUBD"              (0x114) 0x45
+                                                        X"115",  -- (EX)                     (0x115)
+                                                        X"116",  -- (MEM)                    (0x116)
+                                                        X"117",  -- (WB)                     (0x117)
+                                                        X"118",  -- (ID) "MULTD"             (0x118) 0x46
+                                                        X"119",  -- (EX)                     (0x119)
+                                                        X"11a",  -- (MEM)                    (0x11a)
+                                                        X"11b",  -- (WB)                     (0x11b)
+                                                        X"11c",  -- (ID) "DIVD"              (0x11c) 0x47
+                                                        X"11d",  -- (EX)                     (0x11d)
+                                                        X"11e",  -- (MEM)                    (0x11e)
+                                                        X"11f",  -- (WB)                     (0x11f)
+                                                        X"120",  -- (ID) "CVTF2D"            (0x120) 0x48
+                                                        X"121",  -- (EX)                     (0x121)
+                                                        X"122",  -- (MEM)                    (0x122)
+                                                        X"123",  -- (WB)                     (0x123)
+                                                        X"124",  -- (ID) "CVTF2I"            (0x124) 0x49
+                                                        X"125",  -- (EX)                     (0x125)
+                                                        X"126",  -- (MEM)                    (0x126)
+                                                        X"127",  -- (WB)                     (0x127)
+                                                        X"128",  -- (ID) "CVTD2F"            (0x128) 0x4a
+                                                        X"129",  -- (EX)                     (0x129)
+                                                        X"12a",  -- (MEM)                    (0x12a)
+                                                        X"12b",  -- (WB)                     (0x12b)
+                                                        X"12c",  -- (ID) "CVTD2I"            (0x12c) 0x4b
+                                                        X"12d",  -- (EX)                     (0x12d)
+                                                        X"12e",  -- (MEM)                    (0x12e)
+                                                        X"12f",  -- (WB)                     (0x12f)
+                                                        X"130",  -- (ID) "CVTI2F"            (0x130) 0x4c
+                                                        X"131",  -- (EX)                     (0x131)
+                                                        X"132",  -- (MEM)                    (0x132)
+                                                        X"133",  -- (WB)                     (0x133)
+                                                        X"134",  -- (ID) "CVTI2D"            (0x134) 0x4d
+                                                        X"135",  -- (EX)                     (0x135)
+                                                        X"136",  -- (MEM)                    (0x136)
+                                                        X"137",  -- (WB)                     (0x137)
+                                                        X"138",  -- (ID) "MULT"              (0x138) 0x4e
+                                                        X"139",  -- (EX)                     (0x139)
+                                                        X"13a",  -- (MEM)                    (0x13a)
+                                                        X"13b",  -- (WB)                     (0x13b)
+                                                        X"13c",  -- (ID) "DIV"               (0x13c) 0x4f
+                                                        X"13d",  -- (EX)                     (0x13d)
+                                                        X"13e",  -- (MEM)                    (0x13e)
+                                                        X"13f",  -- (WB)                     (0x13f)
+                                                        X"140",  -- (ID) "EQF"               (0x140) 0x50
+                                                        X"141",  -- (EX)                     (0x141)
+                                                        X"142",  -- (MEM)                    (0x142)
+                                                        X"143",  -- (WB)                     (0x143)
+                                                        X"144",  -- (ID) "NEF"               (0x144) 0x51
+                                                        X"145",  -- (EX)                     (0x145)
+                                                        X"146",  -- (MEM)                    (0x146)
+                                                        X"147",  -- (WB)                     (0x147)
+                                                        X"148",  -- (ID) "LTF"               (0x148) 0x52
+                                                        X"149",  -- (EX)                     (0x149)
+                                                        X"14a",  -- (MEM)                    (0x14a)
+                                                        X"14b",  -- (WB)                     (0x14b)
+                                                        X"14c",  -- (ID) "GTF"               (0x14c) 0x53
+                                                        X"14d",  -- (EX)                     (0x14d)
+                                                        X"14e",  -- (MEM)                    (0x14e)
+                                                        X"14f",  -- (WB)                     (0x14f)
+                                                        X"150",  -- (ID) "LEF"               (0x150) 0x54
+                                                        X"151",  -- (EX)                     (0x151)
+                                                        X"152",  -- (MEM)                    (0x152)
+                                                        X"153",  -- (WB)                     (0x153)
+                                                        X"154",  -- (ID) "GEF"               (0x154) 0x55
+                                                        X"155",  -- (EX)                     (0x155)
+                                                        X"156",  -- (MEM)                    (0x156)
+                                                        X"157",  -- (WB)                     (0x157)
+                                                        X"158",  -- (ID) "MULTU"             (0x158) 0x56
+                                                        X"159",  -- (EX)                     (0x159)
+                                                        X"15a",  -- (MEM)                    (0x15a)
+                                                        X"15b",  -- (WB)                     (0x15b)
+                                                        X"15c",  -- (ID) "DIVU"              (0x15c) 0x57
+                                                        X"15d",  -- (EX)                     (0x15d)
+                                                        X"15e",  -- (MEM)                    (0x15e)
+                                                        X"15f",  -- (WB)                     (0x15f)
+                                                        X"160",  -- (ID) "EQD"               (0x160) 0x58
+                                                        X"161",  -- (EX)                     (0x161)
+                                                        X"162",  -- (MEM)                    (0x162)
+                                                        X"163",  -- (WB)                     (0x163)
+                                                        X"164",  -- (ID) "NED"               (0x164) 0x59
+                                                        X"165",  -- (EX)                     (0x165)
+                                                        X"166",  -- (MEM)                    (0x166)
+                                                        X"167",  -- (WB)                     (0x167)
+                                                        X"168",  -- (ID) "LTD"               (0x168) 0x5a
+                                                        X"169",  -- (EX)                     (0x169)
+                                                        X"16a",  -- (MEM)                    (0x16a)
+                                                        X"16b",  -- (WB)                     (0x16b)
+                                                        X"16c",  -- (ID) "GTD"               (0x16c) 0x5b
+                                                        X"16d",  -- (EX)                     (0x16d)
+                                                        X"16e",  -- (MEM)                    (0x16e)
+                                                        X"16f",  -- (WB)                     (0x16f)
+                                                        X"170",  -- (ID) "LED"               (0x170) 0x5c
+                                                        X"171",  -- (EX)                     (0x171)
+                                                        X"172",  -- (MEM)                    (0x172)
+                                                        X"173",  -- (WB)                     (0x173)
+                                                        X"174",  -- (ID) "GED"               (0x174) 0x5d
+                                                        X"175",  -- (EX)                     (0x175)
+                                                        X"176",  -- (MEM)                    (0x176)
+                                                        X"177",  -- (WB)                     (0x177)
+                                                        X"178",  -- (ID) "SB"                (0x178) 0x5e
+                                                        X"179",  -- (EX)                     (0x179)
+                                                        X"17a",  -- (MEM)                    (0x17a)
+                                                        X"17b",  -- (WB)                     (0x17b)
+                                                        X"17c",  -- (ID) "SH"                (0x17c) 0x5f
+                                                        X"17d",  -- (EX)                     (0x17d)
+                                                        X"17e",  -- (MEM)                    (0x17e)
+                                                        X"17f",  -- (WB)                     (0x17f)
+                                                        X"180",  -- (ID) "SW"                (0x180) 0x60
+                                                        X"181",  -- (EX)                     (0x181)
+                                                        X"182",  -- (MEM)                    (0x182)
+                                                        X"183",  -- (WB)                     (0x183)
+                                                        X"184",  -- (ID) "SF"                (0x184) 0x61
+                                                        X"185",  -- (EX)                     (0x185)
+                                                        X"186",  -- (MEM)                    (0x186)
+                                                        X"187",  -- (WB)                     (0x187)
+                                                        X"188",  -- (ID) "SD"                (0x188) 0x62
+                                                        X"189",  -- (EX)                     (0x189)
+                                                        X"18a",  -- (MEM)                    (0x18a)
+                                                        X"18b",  -- (WB)                     (0x18b)
+                                                        X"18c",  -- (ID) "ITLB"              (0x18c) 0x63
+                                                        X"18d",  -- (EX)                     (0x18d)
+                                                        X"18e",  -- (MEM)                    (0x18e)
+                                                        X"18f",  -- (WB)                     (0x18f)
+                                                        X"190",  -- (ID) "SLTUI"             (0x190) 0x64
+                                                        X"191",  -- (EX)                     (0x191)
+                                                        X"192",  -- (MEM)                    (0x192)
+                                                        X"193",  -- (WB)                     (0x193)
+                                                        X"194",  -- (ID) "SGTUI"             (0x194) 0x65
+                                                        X"195",  -- (EX)                     (0x195)
+                                                        X"196",  -- (MEM)                    (0x196)
+                                                        X"197",  -- (WB)                     (0x197)
+                                                        X"198",  -- (ID) "SLEUI"             (0x198) 0x66
+                                                        X"199",  -- (EX)                     (0x199)
+                                                        X"19a",  -- (MEM)                    (0x19a)
+                                                        X"19b",  -- (WB)                     (0x19b)
+                                                        X"19c",  -- (ID) "SGEUI"             (0x19c) 0x67
+                                                        X"19d",  -- (EX)                     (0x19d)
+                                                        X"19e",  -- (MEM)                    (0x19e)
+                                                        X"19f",  -- (WB)                     (0x19f)
+                                                        X"1a0",  -- (ID) "LW"                (0x1a0) 0x68
+                                                        X"1a1",  -- (EX)                     (0x1a1)
+                                                        X"1a2",  -- (MEM)                    (0x1a2)
+                                                        X"1a3",  -- (WB)                     (0x1a3)
+                                                        X"1a4",  -- (ID)                     (0x1a4) 0x69
+                                                        X"1a5",  -- (EX)                     (0x1a5)
+                                                        X"1a6",  -- (MEM)                    (0x1a6)
+                                                        X"1a7",  -- (WB)                     (0x1a7)
+                                                        X"1a8",  -- (ID)                     (0x1a8) 0x6a
+                                                        X"1a9",  -- (EX)                     (0x1a9)
+                                                        X"1aa",  -- (MEM)                    (0x1aa)
+                                                        X"1ab",  -- (WB)                     (0x1ab)
+                                                        X"1ac",  -- (ID)                     (0x1ac) 0x6b
+                                                        X"1ad",  -- (EX)                     (0x1ad)
+                                                        X"1ae",  -- (MEM)                    (0x1ae)
+                                                        X"1af",  -- (EB)                     (0x1af)
+                                                        X"1b0",  -- (ID)                     (0x1b0) 0x6c
+                                                        X"1b1",  -- (EX)                     (0x1b1)
+                                                        X"1b2",  -- (MEM)                    (0x1b2)
+                                                        X"1b3",  -- (EB)                     (0x1b3)
+                                                        X"1b4",  -- (ID)                     (0x1b4) 0x6d
+                                                        X"1b5",  -- (EX)                     (0x1b5)
+                                                        X"1b6",  -- (MEM)                    (0x1b6)
+                                                        X"1b7",  -- (WB)                     (0x1b7)
+                                                        X"1b8",  -- (ID)                     (0x1b8) 0x6e
+                                                        X"1b9",  -- (EX)                     (0x1b9)
+                                                        X"1ba",  -- (MEM)                    (0x1ba)
+                                                        X"1bb",  -- (WB)                     (0x1bb)
+                                                        X"1bc",  -- (ID)                     (0x1bc) 0x6f
+                                                        X"1bd",  -- (EX)                     (0x1bd)
+                                                        X"1be",  -- (MEM)                    (0x1be)
+                                                        X"1bf",  -- (WB)                     (0x1bf)
+                                                        X"1c0",  -- (ID)                     (0x1c0) 0x70
+                                                        X"1c1",  -- (EX)                     (0x1c1)
+                                                        X"1c2",  -- (MEM)                    (0x1c2)
+                                                        X"1c3",  -- (WB)                     (0x1c3)
+                                                        X"1c4",  -- (ID)                     (0x1c4) 0x71
+                                                        X"1c5",  -- (EX)                     (0x1c5)
+                                                        X"1c6",  -- (MEM)                    (0x1c6)
+                                                        X"1c7",  -- (WB)                     (0x1c7)
+                                                        X"1c8",  -- (ID)                     (0x1c8) 0x72
+                                                        X"1c9",  -- (EX)                     (0x1c9)
+                                                        X"1ca",  -- (MEM)                    (0x1ca)
+                                                        X"1cb",  -- (WB)                     (0x1cb)
+                                                        X"1cc",  -- (ID)                     (0x1cc) 0x73
+                                                        X"1cd",  -- (EX)                     (0x1cd)
+                                                        X"1ce",  -- (MEM)                    (0x1ce)
+                                                        X"1cf",  -- (WB)                     (0x1cf)
+                                                        X"1d0",  -- (ID)                     (0x1d0) 0x74
+                                                        X"1d1",  -- (EX)                     (0x1d1)
+                                                        X"1d2",  -- (MEM)                    (0x1d2)
+                                                        X"1d3",  -- (WB)                     (0x1d3)
+                                                        X"1d4",  -- (ID)                     (0x1d4) 0x75
+                                                        X"1d5",  -- (EX)                     (0x1d5)
+                                                        X"1d6",  -- (MEM)                    (0x1d6)
+                                                        X"1d7",  -- (WB)                     (0x1d7)
+                                                        X"1d8",  -- (ID)                     (0x1d8) 0x76
+                                                        X"1d9",  -- (EX)                     (0x1d9)
+                                                        X"1da",  -- (MEM)                    (0x1da)
+                                                        X"1db",  -- (WB)                     (0x1db)
+                                                        X"1dc",  -- (ID)                     (0x1dc) 0x77
+                                                        X"1dd",  -- (EX)                     (0x1dd)
+                                                        X"1de",  -- (MEM)                    (0x1de)
+                                                        X"1df",  -- (WB)                     (0x1df)
+                                                        X"1e0",  -- (ID)                     (0x1e0) 0x78
+                                                        X"1e1",  -- (EX)                     (0x1e1)
+                                                        X"1e2",  -- (MEM)                    (0x1e2)
+                                                        X"1e3",  -- (WB)                     (0x1e3)
+                                                        X"1e4",  -- (ID)                     (0x1e4) 0x79
+                                                        X"1e5",  -- (EX)                     (0x1e5)
+                                                        X"1e6",  -- (MEM)                    (0x1e6)
+                                                        X"1e7",  -- (WB)                     (0x1e7)
+                                                        X"1e8",  -- (ID)                     (0x1e8) 0x7a
+                                                        X"1e9",  -- (EX)                     (0x1e9)
+                                                        X"1ea",  -- (MEM)                    (0x1ea)
+                                                        X"1eb",  -- (WB)                     (0x1eb)
+                                                        X"1ec",  -- (ID)                     (0x1ec) 0x7b
+                                                        X"1ed",  -- (EX)                     (0x1ed)
+                                                        X"1ee",  -- (MEM)                    (0x1ee)
+                                                        X"1ef",  -- (WB)                     (0x1ef)   
+                                                        X"1f0",  -- (ID)                     (0x1f0) 0x7c
+                                                        X"1f1",  -- (EX)                     (0x1f1)
+                                                        X"1f2",  -- (MEM)                    (0x1f2)
+                                                        X"1f3",  -- (WB)                     (0x1f3)
+                                                        X"1f4",  -- (ID)                     (0x1f4) 0x7d
+                                                        X"1f5",  -- (EX)                     (0x1f5)   
+                                                        X"1f6",  -- (MEM)                    (0x1f6)
+                                                        X"1f7",  -- (WB)                     (0x1f7)
+                                                        X"1f8",  -- (ID)                     (0x1f8) 0x7e
+                                                        X"1f9",  -- (EX)                     (0x1f9)
+                                                        X"1fa",  -- (MEM)                    (0x1fa)
+                                                        X"1fb",  -- (WB)                     (0x1fb)
+                                                        X"1fc",  -- (ID)                     (0x1fc) 0x7f
+                                                        X"1fd",  -- (EX)                     (0x1fd)
+                                                        X"1fe",  -- (MEM)                    (0x1fe)
+                                                        X"1ff"   -- (WB)                     (0x1ff)
+                                                        );
+end package microcode_memory;

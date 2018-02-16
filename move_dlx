@@ -1,0 +1,21 @@
+#!/bin/bash
+
+source ~/.bash_aliases
+export -f microscp_toserver
+
+read -s -p "password for $MICROLOGIN@$MICROSYS:" $microsyspassword
+
+files=("I_WORKED" "000-globals.vhd" "001-microcode_memory.vhd" "a-DLX.vhd"\
+"a.a-Fetch.core" "a.a-Fetch.vhd" "a.b-Decode.core" "a.b-Decode.vhd"\
+"a.c-Execute.core" "a.c-Execute.vhd" "a.d-Memory.core" "a.d-Memory.vhd"\
+"compile")
+
+expect -c "
+
+
+foreach file $files {
+    spawn bash -c \"microscp_toserver ~/University/Graziano/DLX/DLX_vhd/$file DLX/simulation\"
+    expect { -re \".*password.*\" { send \"$microsyspassword\" } }
+}
+
+"

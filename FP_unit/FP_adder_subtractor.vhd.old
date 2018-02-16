@@ -1,0 +1,144 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
+
+entity FP_adder_subtractor is
+    generic(
+        nbit:       natural:=   32;
+        exponent:   natural:=   8;
+        mantissa:   natural:=   23
+    );
+    port(
+        A:      in          std_logic_vector(nbit-1 downto 0);
+        B:      in          std_logic_vector(nbit-1 downto 0);
+        sub:    in          std_logic;
+        S:      out         std_logic_vector(nbit-1 downto 0);
+    );
+end entity FP_adder_subtractor;
+
+
+architecture behavioural of FP_adder_subtractor is
+    -- A and B are inputs
+    -- X and Y are A and B after normalizing to same exponent and taking care of sub signal
+    -- X0 and Y0 are X and Y after taking 2's complement if needed
+    -- S0 is sum of X0 and Y0, still 2's complement
+    -- S is output, FP
+    
+    -- 1 bit is added to mantissa size to explicitly represent 1.aaaa from .aaaa
+    signal  mantissa_A:     std_logic_vector(mantissa downto 0);
+    signal  mantissa_B:     std_logic_vector(mantissa downto 0);
+    
+    signal  exponent_A:     std_logic_vector(exponent-1 downto 0);
+    signal  exponent_B:     std_logic_vector(exponent-1 downto 0);
+    
+    signal  sign_A:         std_logic;
+    signal  sign_B:         std_logic;
+    
+    signal  mantissa_X:     std_logic_vector(mantissa downto 0);
+    signal  mantissa_Y:     std_logic_vector(mantissa downto 0);
+    
+    signal  exponent_X:     std_logic_vector(exponent-1 downto 0);
+    signal  exponent_Y:     std_logic_vector(exponent-1 downto 0);
+    
+    signal  sign_X:         std_logic;
+    signal  sign_Y:         std_logic;
+    
+    -- 1 more bit is added to mantissa size to allow 2's complement (basically including sign bit here)
+    signal  mantissa_X0:    std_logic_vector(mantissa+1 downto 0);
+    signal  mantissa_Y0:    std_logic_vector(mantissa+1 downto 0);
+    
+    signal  exponent_X0:    std_logic_vector(exponent-1 downto 0);
+    signal  exponent_Y0:    std_logic_vector(exponent-1 downto 0);
+    
+    -- 1 final bit is added to mantissa size so that overflows do not occur
+    signal  mantissa_S0:    std_logic_vector(mantissa+2 downto 0);
+    signal  exponent_S0:    std_logic_vector(exponent-1 downto 0);
+    signal  sign_S0:        std_logic;
+    
+    signal  mantissa_S1:     std_logic_vector(mantissa+2 downto 0);
+    signal  exponent_S1:     std_logic_vector(exponent-1 downto 0);
+    signal  sign_S1:         std_logic;
+    
+begin
+    -- numbers are explicitly represented as 1.(mantissa)
+    mantissa_A  <=  '1' & A(mantissa-1 downto 0);
+    mantissa_B  <=  '1' & B(mantissa-1 downto 0);
+    
+    exponent_A  <=  A(exponent+mantissa-1 downto mantissa);
+    exponent_B  <=  B(exponent+mantissa-1 downto mantissa);
+    
+    sign_A      <=  A(nbit);
+    sign_B      <=  B(nbit);
+    
+    sign_X      <=  sign_A;
+    sign_Y      <=  sign_B      when sub = '0' else
+                    not(sign_B) when sub = '1';
+    
+    de_normalize: process
+        variable    shift:  natural;
+    begin
+        if (unsigned(exponent_A) > unsigned(exponent_B)) then
+            shift       :=  to_integer(unsigned(exponent_A) - unsigned(exponent_B));
+            mantissa_X  <=  mantissa_A;
+            mantissa_Y  <=  mantissa_B srl shift;
+            exponent_X  <=  exponent_A;
+            exponent_Y  <=  exponent_A;
+        elsif (unsigned(exponent_A) < unsigned(exponent_B)) then
+            shift       :=  to_integer(unsigned(exponent_B) - unsigned(exponent_A));
+            mantissa_X  <=  mantissa_A srl shift;
+            mantissa_Y  <=  mantissa_B;
+            exponent_X  <=  exponent_B;
+            exponent_Y  <=  exponent_B;
+        else
+            shift       :=  0;
+            mantissa_X  <=  mantissa_A;
+            mantissa_Y  <=  mantissa_B;
+            exponent_X  <=  exponent_A;
+            exponent_Y  <=  exponent_A;
+        end if;
+    end process de_normalize;
+    
+    complement: process
+    begin
+        if (sign_X = '1') then
+            mantissa_X0 <=  '1' & std_logic_vector(unsigned(not(mantissa_X))+1);
+        else
+            mantissa_X0 <=  '0' & mantissa_X;
+        end if;
+        if (sign_Y = '1') then
+            mantissa_Y0 <=  '1' & std_logic_vector(unsigned(not(mantissa_Y))+1);
+        else
+            mantissa_Y0 <=  '0' & mantissa_Y;
+        end if;
+        exponent_X0 <=  exponent_X;
+        exponent_Y0 <=  exponent_Y;
+    end process complement
+    
+    add: process
+    begin
+        -- PUT YOUR COOL ADDER HERE IF YOU WANT TO
+        mantissa_S0(mantissa+1 downto 0) <=  std_logic_vector(signed(mantissa_X0)+signed(mantissa_Y0));
+        -- if MSB of both inputs is '0' we impose MSB of sum to be '0' (force positive sum)
+        if (mantissa_X0(mantissa+1)='0') and (mantissa_Y0(mantissa+1)='0') then
+            mantissa_S0(mantissa+2)  <=  '0';
+            her mantissa_S0(mantissa+1) or mantissa_S0(mantissa)
+        -- if MSB of both inputs is '1' we impose MSB of sum to be '1' (force negative sum)
+        elsif (mantissa_X0(mantissa+1)='1') and (mantissa_Y0(mantissa+1)='1') then
+            mantissa_S0(mantissa+2)  <=  '1';
+        -- if MSB of inputs are different there is no overflow (MSB of sum not necessary to represent result: force ground
+        else
+            mantissa_S0(mantissa+2)  <=  '0';
+        end if;
+    end process add;
+    
+    de_complement: process
+    begin
+        if mantissa_S0(mantissa+2)='0' then
+            
+        
+        
+end architecture behavioural;
+            
+            
+    
+    

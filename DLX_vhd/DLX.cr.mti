@@ -1,0 +1,552 @@
+C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.a-AdderSubtractor.core/rca.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.a-AdderSubtractor.core/rca.vhd
+Model Technology ModelSim SE-64 vcom 10.5 Compiler 2016.02 Feb 13 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Compiling entity RCA
+-- Compiling architecture BEHAVIORAL of RCA
+-- Compiling architecture STRUCTURAL of RCA
+-- Loading entity RCA
+-- Compiling configuration CFG_RCA_STRUC
+-- Loading entity RCA
+-- Loading architecture STRUCTURAL of RCA
+-- Loading package CONSTANTS
+-- Loading entity FA
+-- Loading configuration cfg_fa_behavioral
+-- Compiling configuration CFG_RCA_BEHAV
+-- Loading entity RCA
+-- Loading architecture BEHAVIORAL of RCA
+
+} {} {}} C:/Users/Andrea/Desktop/DLX_vhd/000-globals.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/Andrea/Desktop/DLX_vhd/000-globals.vhd
+Model Technology ModelSim SE-64 vcom 10.5 Compiler 2016.02 Feb 13 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling package dlx_config
+
+} {} {}} C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.c-Multiplier.core/encoder_booth.vhdl {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.c-Multiplier.core/encoder_booth.vhdl
+Model Technology ModelSim SE-64 vcom 10.5 Compiler 2016.02 Feb 13 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Loading package CONSTANTS
+-- Compiling entity ENC_unit
+-- Compiling architecture BEHAVIORAL of ENC_unit
+-- Compiling entity ENC_BOOTH
+-- Compiling architecture STRUCTURAL of ENC_BOOTH
+
+} {} {}} C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.a-AdderSubtractor.core/custom_types.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.a-AdderSubtractor.core/custom_types.vhd
+Model Technology ModelSim SE-64 vcom 10.5 Compiler 2016.02 Feb 13 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package CONSTANTS
+-- Compiling package custom_types
+
+} {} {}} C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.c-Multiplier.core/mux2to1.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.c-Multiplier.core/mux2to1.vhd
+Model Technology ModelSim SE-64 vcom 10.5 Compiler 2016.02 Feb 13 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Loading package NUMERIC_STD
+-- Compiling entity mux2to1
+-- Compiling architecture Behavioural of mux2to1
+
+} {} {}} C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.a-AdderSubtractor.core/g_element.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.a-AdderSubtractor.core/g_element.vhd
+Model Technology ModelSim SE-64 vcom 10.5 Compiler 2016.02 Feb 13 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package CONSTANTS
+-- Compiling entity G_ELEMENT
+-- Compiling architecture BEHAVIOURAL of G_ELEMENT
+-- Compiling configuration CFG_GEL_BEHAV
+-- Loading entity G_ELEMENT
+-- Loading architecture BEHAVIOURAL of G_ELEMENT
+
+} {} {}} C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.a-AdderSubtractor.core/pg_element.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.a-AdderSubtractor.core/pg_element.vhd
+Model Technology ModelSim SE-64 vcom 10.5 Compiler 2016.02 Feb 13 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package CONSTANTS
+-- Compiling entity PG_ELEMENT
+-- Compiling architecture BEHAVIOURAL of PG_ELEMENT
+-- Compiling configuration CFG_PGEL_BEHAV
+-- Loading entity PG_ELEMENT
+-- Loading architecture BEHAVIOURAL of PG_ELEMENT
+
+} {} {}} C:/Users/Andrea/Desktop/DLX_vhd/001-microcode_memory.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/Andrea/Desktop/DLX_vhd/001-microcode_memory.vhd
+Model Technology ModelSim SE-64 vcom 10.5 Compiler 2016.02 Feb 13 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package dlx_config
+-- Compiling package microcode_memory
+
+} {} {}} C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.c-Multiplier.core/mul_constants.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.c-Multiplier.core/mul_constants.vhd
+Model Technology ModelSim SE-64 vcom 10.5 Compiler 2016.02 Feb 13 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package dlx_config
+-- Compiling package MUL_CONSTANTS
+
+} {} {}} C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.a-AdderSubtractor.core/carry_select_sum_generator.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.a-AdderSubtractor.core/carry_select_sum_generator.vhd
+Model Technology ModelSim SE-64 vcom 10.5 Compiler 2016.02 Feb 13 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package CONSTANTS
+-- Compiling entity CARRY_SELECT_SUM_GENERATOR
+-- Compiling architecture STRUCTURAL of CARRY_SELECT_SUM_GENERATOR
+-- Compiling configuration CFG_CSSG_STRUC
+-- Loading entity CARRY_SELECT_SUM_GENERATOR
+-- Loading architecture STRUCTURAL of CARRY_SELECT_SUM_GENERATOR
+-- Loading package custom_types
+-- Loading entity CARRY_SELECT_BLOCK
+-- Loading configuration cfg_csb_struc
+
+} {} {}} C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.a-AdderSubtractor.core/mux.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.a-AdderSubtractor.core/mux.vhd
+Model Technology ModelSim SE-64 vcom 10.5 Compiler 2016.02 Feb 13 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package CONSTANTS
+-- Compiling entity MUX
+-- Compiling architecture BEHAVIOURAL of MUX
+-- Compiling configuration CFG_MUX_BEHAV
+-- Loading entity MUX
+-- Loading architecture BEHAVIOURAL of MUX
+
+} {} {}} C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.e-LogicUnit.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.e-LogicUnit.vhd
+Model Technology ModelSim SE-64 vcom 10.5 Compiler 2016.02 Feb 13 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package dlx_config
+-- Compiling entity LogicUnit
+-- Compiling architecture structural of LogicUnit
+
+} {} {}} C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.a-AdderSubtractor.core/tree_decimate.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.a-AdderSubtractor.core/tree_decimate.vhd
+Model Technology ModelSim SE-64 vcom 10.5 Compiler 2016.02 Feb 13 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package CONSTANTS
+-- Loading package custom_types
+-- Compiling entity TREE_DECIMATE
+-- Compiling architecture STRUCTURAL of TREE_DECIMATE
+-- Compiling configuration CFG_TREE_DEC_STRUC
+-- Loading entity TREE_DECIMATE
+-- Loading architecture STRUCTURAL of TREE_DECIMATE
+-- Loading entity G_ELEMENT
+-- Loading entity PG_ELEMENT
+-- Loading configuration cfg_gel_behav
+-- Loading configuration cfg_pgel_behav
+
+} {} {}} C:/Users/Andrea/Desktop/DLX_vhd/a-DLX.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:\Users\Andrea\Desktop\DLX_vhd\a-DLX.vhd}
+Model Technology ModelSim SE-64 vcom 10.5 Compiler 2016.02 Feb 13 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package dlx_config
+-- Compiling entity DLX
+-- Compiling architecture dlx_structural of DLX
+
+} {} {}} C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.g-Shifter.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.g-Shifter.vhd
+Model Technology ModelSim SE-64 vcom 10.5 Compiler 2016.02 Feb 13 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Loading package dlx_config
+-- Compiling entity Shifter
+-- Compiling architecture BEHAVIORAL of Shifter
+
+} {} {}} C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.e-LogicUnit.core/t2_logic.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.e-LogicUnit.core/t2_logic.vhd
+Model Technology ModelSim SE-64 vcom 10.5 Compiler 2016.02 Feb 13 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package dlx_config
+-- Compiling entity BitLogic
+-- Compiling architecture structural of BitLogic
+-- Compiling entity T2_Logic
+-- Compiling architecture structural of T2_Logic
+
+} {} {}} C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.c-Multiplier.core/mul_custom_types.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.c-Multiplier.core/mul_custom_types.vhd
+Model Technology ModelSim SE-64 vcom 10.5 Compiler 2016.02 Feb 13 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package CONSTANTS
+-- Compiling package mul_custom_types
+
+} {} {}} C:/Users/Andrea/Desktop/DLX_vhd/a.a-Fetch.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/Andrea/Desktop/DLX_vhd/a.a-Fetch.vhd
+Model Technology ModelSim SE-64 vcom 10.5 Compiler 2016.02 Feb 13 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package dlx_config
+-- Compiling entity FetchStage
+-- Compiling architecture fetch_rtl of FetchStage
+
+} {} {}} C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.a-AdderSubtractor.core/constants.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.a-AdderSubtractor.core/constants.vhd
+Model Technology ModelSim SE-64 vcom 10.5 Compiler 2016.02 Feb 13 2016
+-- Loading package STANDARD
+-- Compiling package CONSTANTS
+
+} {} {}} C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.vhd
+Model Technology ModelSim SE-64 vcom 10.5 Compiler 2016.02 Feb 13 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package dlx_config
+-- Compiling entity ALU
+-- Compiling architecture structural of ALU
+
+} {} {}} C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.f-Comparator.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.f-Comparator.vhd
+Model Technology ModelSim SE-64 vcom 10.5 Compiler 2016.02 Feb 13 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package dlx_config
+-- Compiling entity Comparator
+-- Compiling architecture behavioural of Comparator
+
+} {} {}} C:/Users/Andrea/Desktop/DLX_vhd/test_bench/a-TB_DLX.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:\Users\Andrea\Desktop\DLX_vhd\test_bench\a-TB_DLX.vhd}
+Model Technology ModelSim SE-64 vcom 10.5 Compiler 2016.02 Feb 13 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity tb_dlx
+-- Compiling architecture TEST of tb_dlx
+-- Compiling configuration CFG_TB
+-- Loading entity tb_dlx
+-- Loading architecture TEST of tb_dlx
+-- Loading package dlx_config
+-- Loading entity DLX
+
+} {} {}} C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.a-AdderSubtractor.core/tree_mantain.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.a-AdderSubtractor.core/tree_mantain.vhd
+Model Technology ModelSim SE-64 vcom 10.5 Compiler 2016.02 Feb 13 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package CONSTANTS
+-- Loading package custom_types
+-- Compiling entity TREE_MANTAIN
+-- Compiling architecture STRUCTURAL of TREE_MANTAIN
+-- Compiling configuration CFG_TREE_MANTAIN_STRUC
+-- Loading entity TREE_MANTAIN
+-- Loading architecture STRUCTURAL of TREE_MANTAIN
+-- Loading entity G_ELEMENT
+-- Loading entity PG_ELEMENT
+-- Loading configuration cfg_gel_behav
+-- Loading configuration cfg_pgel_behav
+
+} {} {}} C:/Users/Andrea/Desktop/DLX_vhd/a.d-Memory.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/Andrea/Desktop/DLX_vhd/a.d-Memory.vhd
+Model Technology ModelSim SE-64 vcom 10.5 Compiler 2016.02 Feb 13 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package dlx_config
+-- Compiling entity MemoryStage
+-- Compiling architecture structural of MemoryStage
+
+} {} {}} C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.c-Multiplier.core/compressor5to2.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.c-Multiplier.core/compressor5to2.vhd
+Model Technology ModelSim SE-64 vcom 10.5 Compiler 2016.02 Feb 13 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Loading package NUMERIC_STD
+-- Compiling entity comp5to2
+-- Compiling architecture behavioral of comp5to2
+
+} {} {}} C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.a-AdderSubtractor.core/fa.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.a-AdderSubtractor.core/fa.vhd
+Model Technology ModelSim SE-64 vcom 10.5 Compiler 2016.02 Feb 13 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package CONSTANTS
+-- Compiling entity FA
+-- Compiling architecture BEHAVIORAL of FA
+-- Compiling configuration CFG_FA_BEHAVIORAL
+-- Loading entity FA
+-- Loading architecture BEHAVIORAL of FA
+
+} {} {}} C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.b-FP_AdderSubtractor.core/leading_zero_detection.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.b-FP_AdderSubtractor.core/leading_zero_detection.vhd
+Model Technology ModelSim SE-64 vcom 10.5 Compiler 2016.02 Feb 13 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling package leading_zero_detection
+-- Compiling package body leading_zero_detection
+-- Loading package leading_zero_detection
+
+} {} {}} C:/Users/Andrea/Desktop/DLX_vhd/a.d-Memory.core/a.d.a-DRAM.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/Andrea/Desktop/DLX_vhd/a.d-Memory.core/a.d.a-DRAM.vhd
+Model Technology ModelSim SE-64 vcom 10.5 Compiler 2016.02 Feb 13 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package dlx_config
+-- Compiling entity DRAM
+-- Compiling architecture behavioural of DRAM
+
+} {} {}} C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.d-FP_Multiplier.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.d-FP_Multiplier.vhd
+Model Technology ModelSim SE-64 vcom 10.5 Compiler 2016.02 Feb 13 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package dlx_config
+-- Compiling entity FP_multiplier
+-- Compiling architecture behavioural of FP_multiplier
+
+} {} {}} C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.b-FP_AdderSubtractor.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.b-FP_AdderSubtractor.vhd
+Model Technology ModelSim SE-64 vcom 10.5 Compiler 2016.02 Feb 13 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package dlx_config
+-- Loading package leading_zero_detection
+-- Loading package complement
+-- Compiling entity FP_AdderSubtractor
+-- Compiling architecture behavioural of FP_AdderSubtractor
+
+} {} {}} C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.a-AdderSubtractor.core/Adder.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.a-AdderSubtractor.core/Adder.vhd
+Model Technology ModelSim SE-64 vcom 10.5 Compiler 2016.02 Feb 13 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package CONSTANTS
+-- Compiling entity Adder
+-- Compiling architecture STRUCTURAL of Adder
+-- Compiling configuration CFG_ADD_STRUC
+-- Loading entity Adder
+-- Loading architecture STRUCTURAL of Adder
+-- Loading entity SPARSE_TREE_CARRY_GENERATOR
+-- Loading entity CARRY_SELECT_SUM_GENERATOR
+-- Loading configuration cfg_stcg_struc
+-- Loading configuration cfg_cssg_struc
+
+} {} {}} C:/Users/Andrea/Desktop/DLX_vhd/a.b-Decode.core/a.b.a-RegisterFile.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/Andrea/Desktop/DLX_vhd/a.b-Decode.core/a.b.a-RegisterFile.vhd
+Model Technology ModelSim SE-64 vcom 10.5 Compiler 2016.02 Feb 13 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package dlx_config
+-- Compiling entity RegisterFile
+-- Compiling architecture simple of RegisterFile
+
+} {} {}} C:/Users/Andrea/Desktop/DLX_vhd/a.a-Fetch.core/a.a.a-IRAM.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/Andrea/Desktop/DLX_vhd/a.a-Fetch.core/a.a.a-IRAM.vhd
+Model Technology ModelSim SE-64 vcom 10.5 Compiler 2016.02 Feb 13 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package std_logic_textio
+-- Loading package dlx_config
+-- Compiling entity IRAM
+-- Compiling architecture IRam_Bhe of IRAM
+
+} {} {}} C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.vhd
+Model Technology ModelSim SE-64 vcom 10.5 Compiler 2016.02 Feb 13 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package dlx_config
+-- Compiling entity ExecuteStage
+-- Compiling architecture structural of ExecuteStage
+
+} {} {}} C:/Users/Andrea/Desktop/DLX_vhd/a.b-Decode.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/Andrea/Desktop/DLX_vhd/a.b-Decode.vhd
+Model Technology ModelSim SE-64 vcom 10.5 Compiler 2016.02 Feb 13 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package dlx_config
+-- Loading package microcode_memory
+-- Compiling entity DecodeStage
+-- Compiling architecture dlx_cu_pu of DecodeStage
+
+} {} {}} C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.a-AdderSubtractor.core/pg_network.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.a-AdderSubtractor.core/pg_network.vhd
+Model Technology ModelSim SE-64 vcom 10.5 Compiler 2016.02 Feb 13 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package CONSTANTS
+-- Compiling entity PG_NETWORK
+-- Compiling architecture BEHAVIOURAL of PG_NETWORK
+-- Compiling configuration CFG_PGN_BEHAV
+-- Loading entity PG_NETWORK
+-- Loading architecture BEHAVIOURAL of PG_NETWORK
+
+} {} {}} C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.c-Multiplier.core/add.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.c-Multiplier.core/add.vhd
+Model Technology ModelSim SE-64 vcom 10.5 Compiler 2016.02 Feb 13 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package CONSTANTS
+-- Compiling entity ADD
+-- Compiling architecture STRUCTURAL of ADD
+-- Compiling configuration CFG_ADD_STRUC
+-- Loading entity ADD
+-- Loading architecture STRUCTURAL of ADD
+-- Loading entity SPARSE_TREE_CARRY_GENERATOR
+-- Loading entity CARRY_SELECT_SUM_GENERATOR
+-- Loading configuration cfg_stcg_struc
+-- Loading configuration cfg_cssg_struc
+
+} {} {}} C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.c-Multiplier.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.c-Multiplier.vhd
+Model Technology ModelSim SE-64 vcom 10.5 Compiler 2016.02 Feb 13 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Loading package NUMERIC_STD
+-- Loading package dlx_config
+-- Loading package MUL_CONSTANTS
+-- Loading package CONSTANTS
+-- Loading package mul_custom_types
+-- Compiling entity Multiplier
+-- Compiling architecture STRUCTURAL of Multiplier
+
+} {} {}} C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.a-AdderSubtractor.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.a-AdderSubtractor.vhd
+Model Technology ModelSim SE-64 vcom 10.5 Compiler 2016.02 Feb 13 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package dlx_config
+-- Compiling entity AdderSubtractor
+-- Compiling architecture structural of AdderSubtractor
+
+} {} {}} C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.a-AdderSubtractor.core/carry_select_block.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.a-AdderSubtractor.core/carry_select_block.vhd
+Model Technology ModelSim SE-64 vcom 10.5 Compiler 2016.02 Feb 13 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package CONSTANTS
+-- Loading package custom_types
+-- Compiling entity CARRY_SELECT_BLOCK
+-- Compiling architecture STRUCTURAL of CARRY_SELECT_BLOCK
+-- Compiling configuration CFG_CSB_STRUC
+-- Loading entity CARRY_SELECT_BLOCK
+-- Loading architecture STRUCTURAL of CARRY_SELECT_BLOCK
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Loading entity RCA
+-- Loading package NUMERIC_STD
+-- Loading entity MUX
+-- Loading configuration cfg_rca_struc
+-- Loading configuration cfg_mux_behav
+
+} {} {}} C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.c-Multiplier.core/mux31.vhdl {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.c-Multiplier.core/mux31.vhdl
+Model Technology ModelSim SE-64 vcom 10.5 Compiler 2016.02 Feb 13 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Loading package CONSTANTS
+-- Compiling entity mux31_unit
+-- Compiling architecture Behavioral of mux31_unit
+-- Compiling entity mux31
+-- Compiling architecture Behavioral of mux31
+
+} {} {}} C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.c-Multiplier.core/half_adder.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.c-Multiplier.core/half_adder.vhd
+Model Technology ModelSim SE-64 vcom 10.5 Compiler 2016.02 Feb 13 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package CONSTANTS
+-- Compiling entity HA
+-- Compiling architecture BEHAVIORAL of HA
+
+} {} {}} C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.b-FP_AdderSubtractor.core/complement.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.b-FP_AdderSubtractor.core/complement.vhd
+Model Technology ModelSim SE-64 vcom 10.5 Compiler 2016.02 Feb 13 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling package complement
+-- Compiling package body complement
+-- Loading package complement
+
+} {} {}} C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.a-AdderSubtractor.core/sparse_tree_carry_generator.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.a-AdderSubtractor.core/sparse_tree_carry_generator.vhd
+Model Technology ModelSim SE-64 vcom 10.5 Compiler 2016.02 Feb 13 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package CONSTANTS
+-- Compiling entity SPARSE_TREE_CARRY_GENERATOR
+-- Compiling architecture STRUCTURAL of SPARSE_TREE_CARRY_GENERATOR
+-- Compiling configuration CFG_STCG_STRUC
+-- Loading entity SPARSE_TREE_CARRY_GENERATOR
+-- Loading architecture STRUCTURAL of SPARSE_TREE_CARRY_GENERATOR
+-- Loading entity PG_NETWORK
+-- Loading package custom_types
+-- Loading entity TREE_DECIMATE
+-- Loading entity TREE_MANTAIN
+-- Loading configuration cfg_pgn_behav
+-- Loading configuration cfg_tree_dec_struc
+-- Loading configuration cfg_tree_mantain_struc
+
+} {} {}} C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.c-Multiplier.core/XOR_block.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.c-Multiplier.core/XOR_block.vhd
+Model Technology ModelSim SE-64 vcom 10.5 Compiler 2016.02 Feb 13 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Loading package NUMERIC_STD
+-- Loading package CONSTANTS
+-- Loading package custom_types
+-- Compiling entity XOR_block
+-- Compiling architecture STRUCTURAL of XOR_block
+
+} {} {}} C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.c-Multiplier.core/register.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.c-Multiplier.core/register.vhd
+Model Technology ModelSim SE-64 vcom 10.5 Compiler 2016.02 Feb 13 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Loading package CONSTANTS
+-- Compiling entity REG
+-- Compiling architecture REG of REG
+
+} {} {}} C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.c-Multiplier.core/block_cmpr_5to2.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Users/Andrea/Desktop/DLX_vhd/a.c-Execute.core/a.c.a-ALU.core/a.c.a.c-Multiplier.core/block_cmpr_5to2.vhd
+Model Technology ModelSim SE-64 vcom 10.5 Compiler 2016.02 Feb 13 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Loading package NUMERIC_STD
+-- Loading package CONSTANTS
+-- Compiling entity comp5to2_block
+-- Compiling architecture behavioral of comp5to2_block
+
+} {} {}}
